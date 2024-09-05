@@ -23,15 +23,17 @@ void insertion_sort(int * nums, int size)
         we ensure that the entire list is sorted */
 
 void print_array( int * nums, int size)
-
 {
-    std::cout << nums << "\n";
+for (int i = 0; i<size; i++)
+{
+    std::cout << nums[i] << " ";
+}
 }
 
 int main()
 {
     std::cout << "Enter the size of array to be sorted: ";
-    int x{} ;
+    int x;
     std::cin>>x;
 
     int array[x]; 
