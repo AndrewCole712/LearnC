@@ -3,6 +3,7 @@
 InsertionArray::InsertionArray(int length) {
   // This dynamically allocates an array using new
   data = new int[length];
+  mLength = length;
   // Add your code to randomly initialize here
 }
 
