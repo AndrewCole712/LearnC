@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.py": "python",
+    "string_view": "cpp",
+    "tuple": "cpp"
+  }
+}
