@@ -1,6 +1,6 @@
 #include "insertion.hpp"
 
-InsertionArray::InsertionArray(int length) {
+InsertionArray::InsertionArray(const int length) {
   // This dynamically allocates an array using new
   data = new int[length];
   mLength = length;
