@@ -1,9 +1,10 @@
 #include "insertion.hpp"
 
-InsertionArray::InsertionArray(const int length) {
+InsertionArray::InsertionArray(const int length)
+  : mLength(length)
+{
   // This dynamically allocates an array using new
   data = new int[length];
-  mLength = length;
   // Add your code to randomly initialize here
 }
 
