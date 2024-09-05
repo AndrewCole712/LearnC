@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstdlib>
 
-void insertion_sort(int nums, int size)
+void insertion_sort(int * nums, int size)
 {
-    for (int i {1}; i < size; i++)
+    for (int i = 1; i < size; i++)
     {
         int key = nums[i];
         int j = i-1;
@@ -22,30 +22,29 @@ void insertion_sort(int nums, int size)
         Starting with the element second to the left ("int i=1"), 
         we ensure that the entire list is sorted */
 
-void print_array( int nums, int size)
+void print_array( int * nums, int size)
 {
-    std::cout << nums << "\n";
+for (int i = 0; i<size; i++)
+{
+    std::cout << nums[i] << " ";
 }
-
-int array_builder(int size)
-{
-    int array[ size ];
-    for (int i = 0; i < size; i++)
-    {
-        rand() % 100;
-    };
-
 }
 
 int main()
 {
     std::cout << "Enter the size of array to be sorted: ";
-    int x{};
+    int x;
     std::cin>>x;
 
-    int array_to_sort = array_builder(x);
-    insertion_sort(array_to_sort, x);
-    print_array(array_to_sort, x);
+    int array[x]; 
+
+    for (int i = 0; i < x; i++)
+    {
+        array[i] = rand() % 100;
+    }
+
+    insertion_sort(array, x);
+    print_array(array, x);
 
     return 0;
 }
