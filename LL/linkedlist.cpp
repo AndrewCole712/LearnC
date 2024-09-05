@@ -16,16 +16,21 @@
 
 
 template <typename T>
-LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
+LinkedList<T>::LinkedList()
+{
+    // TODO:
+}
 
 template <typename T>
-LinkedList<T>::LinkedList(const std::vector<T> &vec) {
-
+LinkedList<T>::LinkedList(const std::vector<T> &vec)
+{
+    // TODO:
 }
 
 // Insert function implementation
 template <typename T>
-void LinkedList<T>::insert(const int index, const T &object) {
+void LinkedList<T>::insert(const int index, const T &object)
+{
     // Stub: Insert logic goes here
 }
 
