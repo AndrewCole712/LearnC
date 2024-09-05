@@ -25,7 +25,7 @@ public:
   void printArray();
   // These are private variables, they can only be accessed inside member functions
 private:
-  int mLength;
+  const int mLength;
   int *data;
 };
 
