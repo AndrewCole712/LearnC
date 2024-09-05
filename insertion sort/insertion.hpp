@@ -1,9 +1,12 @@
+// This is what we call a header
+#ifndef INSERTION_HPP_
+#define INSERTION_HPP_
+
 class InsertionArray
 {
 public:
   // This is a constructor, it is called every time you create a new object or instantiate an InsertionArrray object
-  InsertionArray(const int length);
-  // This is a destructor, it is called (invoked) every time you delete a new object or it goes off the stack (scope in which it is declared ends)
+  InsertionArray(const int size);
   // Scope is the {} a block of code is enclosed in
   /**
    * {
@@ -12,8 +15,8 @@ public:
    *  blah balh
    *
    * }
-   * everything inside these curl braces is in the same scope. If I go into functionb, I can't access something in the curl braces such as int x
-   * unless I passed it in. If I am in functiona, I can't action functionb variables. If I am in functionb, I can't access functiona variables or stuff in curly braces.
+   * you can only access things that were either passed in as arguments, or defined inside the curly brackets you are in
+   * this is very important to remember
    *
    */
   ~InsertionArray();
@@ -25,3 +28,5 @@ private:
   int mLength;
   int *data;
 };
+
+#endif
