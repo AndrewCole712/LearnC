@@ -6,12 +6,14 @@ InsertionArray::InsertionArray(int length) {
   // Add your code to randomly initialize here
 }
 
-InsertionArray::~InsertionArray() {
+InsertionArray::~InsertionArray()
+{
   // This frees the data
   delete[] data;
 }
 
-void InsertionArray::printArray() {
+void InsertionArray::printArray()
+{
   // TODO: Add your function to print the array here (use the member variable as the length)
 }
 
