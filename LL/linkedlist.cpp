@@ -24,7 +24,6 @@ LinkedList<T>::LinkedList()
 template <typename T>
 LinkedList<T>::LinkedList(const std::vector<T> &vec)
 {
-    // TODO:
 }
 
 // Insert function implementation
