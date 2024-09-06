@@ -47,6 +47,12 @@ T& LinkedList<T>::operator[](const int index) {
     // TODO: Add code here
 }
 
+template <typename T>
+void LinkedList<T>::printReverse() {
+    // Print reverse linkedlist in O(size)
+
+}
+
 int main(int argc, char *argv)
 {
   LinkedList<std::string> stringList();
