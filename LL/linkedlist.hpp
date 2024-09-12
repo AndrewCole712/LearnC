@@ -11,6 +11,9 @@ public:
   //pointer to next node
   Node* next;
 
+  // default constructor 
+  Node() {}
+
   // node constructor
   Node(T value);
 
@@ -27,10 +30,15 @@ public:
   T remove(const int index);
   T operator[](const int index);
   void printReverse() const;
-  const Node& getStart() const {return start;}
-  void LinkedList<T>::insert(const int index, const T &object);
+  void printForward() const;
+  const Node<T>& getStart() const {return start;}
+  void insert(const int index, const T &object);
+  int getLength();
+
+
 private:
-  Node start;
+  Node<T> *start;
+  int length = 0;
 };
 
 

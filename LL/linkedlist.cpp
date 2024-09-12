@@ -20,78 +20,105 @@ template <typename T>
 Node<T>::Node(T value) : value(value), next(nullptr) {}
 
 template <typename T>
-LinkedList<T>::LinkedList() {}
+LinkedList<T>::LinkedList() : start(nullptr), length(0) {}
 
 template <typename T>
 LinkedList<T>::LinkedList(const std::vector<T> &vec)
 {
-    Node *cur = &start;
-    for (const auto &item : vec) {
-        cur->value = vec[item];
+    start = nullptr;
+    length = vec.size();
+    Node<T> *cur;
+    Node<T> *newNode = new Node<T>(vec[0]);
+    start = newNode;
+    cur = start;
+    //std::cout << &start << std::endl;
+
+    for (int i = 1; i<vec.size()+1; i++) {
+        // std::cout << &start << " " << cur << std::endl;
+        Node<T> *newNode = new Node<T>(vec[i]);
+        cur->next = newNode;
+        //std::cout << &start << " " << cur << std::endl;
         cur = cur->next;
     }
+
+    /* need to make first element node and set start equal to it */
 }
 
 // Insert function implementation
 template <typename T>
 void LinkedList<T>::insert(const int index, const T &newValue)
 {
+    if (index > length ) {
+            std::cout << "Index out of bounds of the current linked list" << std::endl;
+            }
     // create a node pointer "cur" to traverse through the list, 
     // which begins at the head 
-    Node *cur = &start;
-    // create our new Node with the corresponding value 
-    Node *newNode = new Node(newValue);
-
-    // if the new Node is being inserted at the head of the list, 
-    // then we must point it at the head
-    if (index == 0) { 
-        newNode->next = start;
-        start = newNode;
-    } 
-
-    /* if the node is not being inserted at the head, 
-    then it's either being inserted somewhere in the middle 
-    or at the tail */
     else {
-        int i = 0
-        /* the while loop breaks if either we reach
-        the desired index (i != index-1) or we reach 
-        the end of the list (cur->next != nullptr) */
-        while (i != index-1 && cur->next != nullptr) {
-            cur = cur->next;
-            ++i;
-        }
-        newNode->next = cur->next;
-        cur->next = newNode;
+        auto *cur = start;
+    // create our new Node with the corresponding value 
+        Node<T> *newNode = new Node<T>(newValue);
+
+        // if the new Node is being inserted at the head of the list, 
+        // then we must point it at the head
+        if (index == 0) { 
+            newNode->next = cur;
+            start = newNode;
+            ++length;
+            } 
+
+        /* if the node is not being inserted at the head, 
+        then it's either being inserted somewhere in the middle 
+        or at the tail */
+        else {
+            int i = 0;
+            /* loop breaks when we reach desired index */
+            while (i < index - 1) {
+                cur = cur->next;
+                ++i;
+                }
+
+            newNode->next = cur->next;
+            cur->next = newNode;
+            ++length;
+            }
+
     }
 }
 
 // Remove function implementation
 template <typename T>
 T LinkedList<T>::remove(const int index) {
-    Node *cur = &start;
-    //if the node being removed is the head
-    if (index = 0) {
-        start = start->next
-        cur->next = nullptr;
+        
+    if (index > length - 1) {
+        std::cout << "The node you wish to remove does not exist in the list" << std::endl;
+        return 0;
     }
 
-    //if the node being removed is any other element
     else {
-        int i = 0
-        while (i != index && cur->next != nullptr) {
-            Node *prev = cur;
-            cur = cur->next;
-            ++i; 
+        auto *cur = start;
+        Node<T> *prev = start;
+        //prev->next = cur
+        //if the node being removed is the head
+        if (index == 0) {
+            start = cur->next;
+            //std::cout << start.value << std::endl;
+            cur->next = nullptr;
+            --length;
+            return cur->value;
         }
-        /* if we reached the index to break the loop, 
-        then we can link the node preceeding the 
-        removed node to the node following the removed node
-        and we can link the removed node to nullptr to 
-        delete the node */
-        if (i == index) {
+
+        //if the node being removed is any other element
+        else {
+            int i = 0;
+            while (i != index) {
+                prev = cur;
+                cur = cur->next;
+                ++i; 
+            }
             prev->next = cur->next;
             cur->next = nullptr;
+            --length;
+            return cur->value;
         }
         
         /* if we reached the tail of the list 
@@ -99,53 +126,84 @@ T LinkedList<T>::remove(const int index) {
         the index of the node to be removed,
         then the node to be removed does not exist
         within the list */
-        else {
-            std::cout << "The node you wish to remove does not exist in the list" << std::endl;
-        }
     }
-
-
-    return T(); // Temporary return of default-constructed T
+    //return T(); // Temporary return of default-constructed T}
 }
 
 // Subscript operator implementation
 template <typename T>
 T LinkedList<T>::operator[](const int index) {
     // Stub: Access logic goes here
-    Node *cur = &start;
 
-    int i = 0; 
-    while (i != index && cur->next != nullptr) {
-        cur = cur->next;
-        ++i;
-    }
+    if  (index > length - 1) {
+        std::cout << "Index out of bounds of the current linked list" << std::endl;
+        return 0;
+        }
+
+
+    else {
+        auto *cur = start;
+
+        int i = 0; 
+        while (i != index) {
+            cur = cur->next;
+            ++i;
+            }
+        return cur->value;
+        }    
+    
+
+    
 
     /* if the index is not in the 
     the linkedlist, then the loop will break 
     when we reach the end and cur->next == nullptr */
-    if (i != index) {
-        std::cout << "The node does not exist in the linkedlist" << std::endl;
     }
-    else {
-        return T cur->value;
-    }
+
+template <typename T>
+int LinkedList<T>::getLength() {
+    std::cout << length << std::endl;
+    return length;
 }
 
 template <typename T>
 void LinkedList<T>::printReverse() const {
+    // implement stack first then utilize here
     // Print reverse linkedlist in O(size)
-
 }
+
+template <typename T>
+void LinkedList<T>::printForward() const {
+        if (length < 1) {
+            std::cout << "There are no elements in this list" << std::endl;
+        }
+        else {
+            auto *cur = start;
+            while (cur->next!=nullptr) {
+                std::cout << cur->value << std::endl;
+                cur = cur->next;
+            }
+        }
+    } 
 
 int main(int argc, char **argv)
 {
-    std::vector<int> data = {1, 2, 3, 4, 5};
-    std::cout << data.size() << std::endl;
+    std::vector<int> data = {0, 1, 2, 3, 4};
+    // std::cout << data.size() << std::endl;
+    LinkedList<int> linked_data(data);
+    linked_data.printForward();
+    std::cout << linked_data.remove(0) << "\n" << std::endl;
+    std::cout << linked_data.remove(4) << "\n" << std::endl;
+
+    linked_data.printForward();
+
+
+
+    return 0;
 
     // for (const auto &item : data) {
     //     item
     // }
-
 }
 
 

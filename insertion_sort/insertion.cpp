@@ -48,4 +48,5 @@ int main(void) {
   array.printArray();
   array.insertionSort();
   array.printArray();
+
 }
