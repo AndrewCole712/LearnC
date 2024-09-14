@@ -29,7 +29,7 @@ public:
 
   T remove(const int index);
   T operator[](const int index);
-  void printReverse() const;
+  void reverseList();
   void printForward() const;
   const Node<T>& getStart() const {return start;}
   void insert(const int index, const T &object);

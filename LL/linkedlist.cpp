@@ -25,7 +25,6 @@ LinkedList<T>::LinkedList() : start(nullptr), length(0) {}
 template <typename T>
 LinkedList<T>::LinkedList(const std::vector<T> &vec)
 {
-    start = nullptr;
     length = vec.size();
     Node<T> *cur;
     Node<T> *newNode = new Node<T>(vec[0]);
@@ -33,7 +32,7 @@ LinkedList<T>::LinkedList(const std::vector<T> &vec)
     cur = start;
     //std::cout << &start << std::endl;
 
-    for (int i = 1; i<vec.size()+1; i++) {
+    for (int i = 1; i < vec.size()+1; i++) {
         // std::cout << &start << " " << cur << std::endl;
         Node<T> *newNode = new Node<T>(vec[i]);
         cur->next = newNode;
@@ -87,8 +86,7 @@ void LinkedList<T>::insert(const int index, const T &newValue)
 
 // Remove function implementation
 template <typename T>
-T LinkedList<T>::remove(const int index) {
-        
+T LinkedList<T>::remove(const int index) {   
     if (index > length - 1) {
         std::cout << "The node you wish to remove does not exist in the list" << std::endl;
         return 0;
@@ -101,8 +99,8 @@ T LinkedList<T>::remove(const int index) {
         //if the node being removed is the head
         if (index == 0) {
             start = cur->next;
+            delete cur;
             //std::cout << start.value << std::endl;
-            cur->next = nullptr;
             --length;
             return cur->value;
         }
@@ -115,10 +113,11 @@ T LinkedList<T>::remove(const int index) {
                 cur = cur->next;
                 ++i; 
             }
+            T deleted = cur->value;
             prev->next = cur->next;
-            cur->next = nullptr;
+            delete cur;
             --length;
-            return cur->value;
+            return deleted;
         }
         
         /* if we reached the tail of the list 
@@ -167,9 +166,23 @@ int LinkedList<T>::getLength() {
 }
 
 template <typename T>
-void LinkedList<T>::printReverse() const {
-    // implement stack first then utilize here
-    // Print reverse linkedlist in O(size)
+void LinkedList<T>::reverseList() {
+    Node<T> *cur;
+    Node<T> *front; 
+    cur = start -> next;
+    
+    while (cur->next != nullptr) 
+        cur = cur->next;
+    front = cur;
+    cur = start -> next;
+    while (cur != nullptr) {
+        
+        start -> next = front;
+        front = start;
+        start = cur;
+        cur = cur -> next;
+    }
+    start = front;
 }
 
 template <typename T>
@@ -192,12 +205,14 @@ int main(int argc, char **argv)
     // std::cout << data.size() << std::endl;
     LinkedList<int> linked_data(data);
     linked_data.printForward();
-    std::cout << linked_data.remove(0) << "\n" << std::endl;
-    std::cout << linked_data.remove(4) << "\n" << std::endl;
+    std::cout << "\n" << std::endl;
 
+    //std::cout << linked_data.remove(0) << "\n" << std::endl;
+    std::cout << linked_data.remove(2) << "\n" << std::endl;
+
+    linked_data.reverseList();
+        
     linked_data.printForward();
-
-
 
     return 0;
 

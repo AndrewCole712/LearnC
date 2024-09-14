@@ -1,25 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include "/Users/andrewcole/LearningToCode/LearnC//LL/linkedlist.hpp"
 
-typedef struct {
-    std::vector<int> blah; 
-    std::map<std::string, int> blah2;
+template <typename T>
+Node<T>::Node(T value) : value(value), next(nullptr) {}
 
-} crazy_boject;
+int main(int argc, char **argv) {
+    Node<int> *x = new Node<int>(5);
+    Node<int> *z = new Node<int>(6);
+    Node<int> *y = x;
 
-void beta(const crazy_boject &c) {
-    // c.blah = std::vector<int>(100);
-    // c.blah[50] = 69;
+    x->next = z;
+
+    std::cout << y->next->value << std::endl;
 }
 
-int main() {
 
-    crazy_boject obj;
-    // std::cout << obj.blah[50] << std::endl;
-    beta(obj);
-    // std::cout << obj.blah[50] << std::endl;
-
-
-
-}
